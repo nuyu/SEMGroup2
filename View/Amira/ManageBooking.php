@@ -1,257 +1,119 @@
-<style>
-* {
-    box-sizing: border-box;
-}
+<html>
+<head><title>Car Booking Form</title></head>
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-}
+<body>
+<?php include"Include/MetaLink.php";?>
+<?php include"Style.php";?>
+<?php include"Include/CustomerHeader.php";?>
 
-/* Style the header */
-header {
-    background-color: #ccc;
-    padding: 10px;
-    text-align: center;
-    font-size: 35px;
-    color: #8E44AD;
-    font-family: 'Fjalla One', sans-serif;
-}
+<div align="center">
+<br><br><h1>CAR BOOKING LOAN</h1></div><br><br>
 
-.navbar {
-    overflow: hidden;
-    background-color: #566573;
-    font-family: Arial, Helvetica, sans-serif;
-}
+<table align="center" border="1">
 
-.navbar a {
-    float: left;
-    font-size: 16px;
-    color: white;
-    text-align: center;
-    padding: 14px 135px;
-    text-decoration: none;
-}
-
-.dropdown {
-    float: left;
-    overflow: hidden;
-}
-
-.dropdown .dropbtn {
-    font-size: 16px;    
-    border: none;
-    outline: none;
-    color: white;
-    padding: 14px 135px;
-    background-color: inherit;
-    font-family: inherit;
-    margin: 0;
-}
-
-.navbar a:hover, .dropdown:hover .dropbtn {
-    background-color: #2980B9;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #8E44AD;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
-}
-
-.dropdown-content a {
-    float: none;
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-}
-
-.dropdown-content a:hover {
-    background-color: #ddd;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-/* Create two columns/boxes that floats next to each other */
-nav {
-    float: left;
-    width: 70%;
-    height: 450px; /* only for demonstration, should be removed */
-    background: #ccc;
-    padding: 20px;
-    margin-top: 10px;
-    margin-bottom: 10px; 
-}
-
-/* Style the list inside the menu */
-nav ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-/* Clear floats after the columns */
-section:after {
-
-    content: "";
-    display: table;
-    clear: both;
-    width: 70%;   
-}
-
-/* Style the tab */
-.tab {
-    overflow: hidden;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
-}
-
-/* Style the buttons inside the tab */
-.tab button {
-    background-color: inherit;
-    float: left;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    padding: 14px 16px;
-    transition: 0.3s;
-    font-size: 17px;
-}
-
-/* Change background color of buttons on hover */
-.tab button:hover {
-    background-color: #ddd;
-}
-
-/* Create an active/current tablink class */
-.tab button.active {
-    background-color: #ccc;
-}
-
-/* Style the tab content */
-.tabcontent {
-    display: none;
-    padding: 6px 12px;
-    border: 1px solid #ccc;
-    border-top: none;
-}
+  
+<body id="dullbackground">
+<form action="CarLoan.php" method="post">
+<div class="container">
 
 
-.buttonAdd {
-    background-color: #F39C12;
-    border: none;
-    color: black;
-    padding: 10px 25px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    position:relative; 
-    left: 669px;
-    top: 10px;
-}
+<div class="row">
+<div class="col-25">
+<label for="fname">Booking ID</label>
+</div>
+<div class="col-75">
+<input type="text" id="Booking_ID" name="Booking_ID"  value = <?php echo $Booking_ID;?> required>
+</div>
+</div>
+<br>
+<div class="row">
+<div class="col-25">
+<label for="address">Pickup Time</label>
+</div>
+<div class="col-75">
+<input type="time" id="Pickup_Time" name="Pickup_Time"
+       value=<?php echo $Pickup_Time?>
+       
+</div>
+</div>
+
+<div class="row">
+<div class="col-25">
+<label for="date">Pickup Date</label>
+</div>
+<div class="col-75">
+<input type="date" id="Pickup_Date" name="Pickup_Date"  value = <?php echo $Pickup_Date;?> required>
+</div>
+</div>
+
+<div class="row">
+<div class="col-25">
+<label for="time">Return Time</label>
+</div>
+<div class="col-75">
+<select id="Return_Time" name="Return_Time"  value = <?php echo $Return_Time;?>>
+</select>
+</div>
+</div>
+
+<div class="row">
+<div class="col-25">
+<label for="Car_Name">Car Name</label>
+</div>	
+<div class="col-75">
+<input type="text" id="Car_Name" name="Car_Name"  value = <?php echo $Car_Name;?> required>
+</div>
+</div><br>
 
 
-table.table1 {
-    border: 1px solid black;
-    border-collapse: collapse;
-    width: 90%;
-    margin-top: 20px;
-}
+<div class="row">
+<div class="col-25">
+<label for="text"><div class="row">
+<div class="col-25">
+<label for="time">Car Plate</label>
+</div>
+<div class="col-75">
+<select id="Car_Plate" name="Car_Plate"  value = <?php echo $Car_Plate;?>>
+</select>
+</div>
+</div>
 
-table.table1, table.table1 td, table.table1 th {
-    border: 1px solid black;
-}
+<div class="row">
+<div class="col-25">
+<label for="contact">Car Status</label>
+</div>	
+<div class="col-75">
+<input type="text" id="Car_Status" name="Car_Status"  value = <?php echo $Car_Status;?> required>
+</div>
+</div><br></label>
+</div>
 
 
 
-table.table2 {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-    margin-top: 30px;
-}
+<div class="row">
+<input type="submit" class="w3-block w3-right button w3-button" value="Update">
+<a href="CustomerProfilePage.php" class="w3-block w3-right button w3-button">Back</a>
+</form>
+</div>
+</div>
 
-table.table2 td, table.table2 th {
-    border: 0px;
-    text-align: left;
-    padding: 8px;
-}
-
-table.table2 tr:nth-child(even) {
-    background-color: #ccc;
-}
+<?php include"Include/MainPageFooter.php";?>
 
 
-article {
-    float: right;
-    padding: 40px;
-    width: 20%;
-    background-color: #2980B9  ;
-    height: 440px; /* only for demonstration, should be removed */
-    margin-top: 10px;
-    margin-bottom: 10px;
-    text-align: center;
-    padding-top: 10px;
-    
-}
-
-.buttonPrint {
-    background-color: #F39C12;
-    border: none;
-    color: black;
-    padding: 10px 25px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    position:relative; 
-    left: 830px; 
-    bottom: 10px;
-}
-
-.buttonConfirm {
-    background-color: #F39C12;
-    border: none;
-    color: black;
-    padding: 10px 25px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    position:relative; 
-    left: 840px;
-    top:120px; 
-    
-}
+ 
+  
+</table>
+<br><br>
+<div align="center">
+<a href ="CarLoan.php?Booking_ID=1" class ="btn btn-info">Submit</a> </div>
 
 
-.button {
-    background-color: #F39C12;
-    border: none;
-    color: black;
-    padding: 10px 25px;
-    text-align: center;
-}
+</form>
+<br><br><hr>
+<br><br><div align="center"> <a href="AdministratorHomePage.php">Back to Homepage</a> 
+<?php include"Include/MainPageFooter.php";?>
+</div>
+</body>
+</html>
 
 
-
-/* Style the footer */
-footer {
-    background-color: #777;
-    padding: 10px;
-    text-align: center;
-    color: white;
-}
-</style>
