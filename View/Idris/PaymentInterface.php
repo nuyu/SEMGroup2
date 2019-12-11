@@ -1,191 +1,183 @@
-<?php
-
-require_once'../Controller/PaymentController.php';
-
-$PaymentController = new PaymentController();
-
-if(isset($_GET['Pmethod'])){
-
-$PaymentController->PayMethod();
-}
-
-if(isset($_GET['radio'])){
-
-$PaymentController->Pmethod();
-}
-
-
-
-
-
-$payment = $PaymentController->view();
-
-
-
-
-
-?>
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<title>Welcome to Car Rental System</title>
+<?php include"Include/MetaLink.php";?>
+<?php include"Style.php";?>
 <head>
-	<title>PAYMENT</title>
-	<link rel="stylesheet" type="text/css" href="payment1.css">
-    <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
-	<style type="text/css">
-	#apDiv1 {
-	position: absolute;
-	width: 846px;
-	height: 487px;
-	z-index: 1;
-	left: 14px;
-	top: 220px;
-	background-color: #bdbdbd;
+<style>
+.col-50 {
+  -ms-flex: 100%; /* IE10 */
+  flex: 100%;
 }
-    #apDiv2 {
-	position: absolute;
-	width: 711px;
-	height: 379px;
-	z-index: 1;
-	left: 59px;
-	top: 53px;
-	background-color: #e0e0e0;
+
+.col-75 {
+  -ms-flex: 105%; /* IE10 */
+  flex: 105%;
 }
-    #apDiv3 {
-	position: absolute;
-	width: 414px;
-	height: 287px;
-	z-index: 1;
-	background-color: #9e9e9e;
-	left: 33px;
-	top: 41px;
+
+.col-25,
+.col-50,
+.col-75 {
+  padding: 0 16px;
 }
-    #apDiv4 {
-	position: absolute;
-	width: 185px;
-	height: 289px;
-	z-index: 2;
-	left: 466px;
-	top: 33px;
-	background-color: #9e9e9e;
+
+.container { 
+  background-color: #f2f2f2;
+  padding: 45px 40px 45px 40px;
+  border: 1px solid lightgrey;
+  border-radius: 4px;
 }
-    #apDiv5 {
-	position: absolute;
-	width: 61px;
-	height: 26px;
-	z-index: 1;
-	left: 103px;
-	top: 238px;
+
+input[type=text] {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
 }
-    #apDiv6 {
-	position: absolute;
-	width: 152px;
-	height: 26px;
-	z-index: 2;
-	left: 134px;
-	top: 156px;
+
+label {
+  margin-bottom: 10px;
+  display: block;
 }
-    #apDiv7 {
-	position: absolute;
-	width: 114px;
-	height: 23px;
-	z-index: 3;
-	left: 22px;
-	top: 193px;
+
+.icon-container {
+  margin-bottom: 20px;
+  padding: 7px 0;
+  font-size: 24px;
 }
-    #apDiv8 {
-	position: absolute;
-	width: 125px;
-	height: 25px;
-	z-index: 4;
-	left: 22px;
-	top: 217px;
+
+.btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px;
+  margin: 10px 0;
+  border: none;
+  width: 100%;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 17px;
 }
-    #apDiv9 {
-	position: absolute;
-	width: 127px;
-	height: 23px;
-	z-index: 5;
-	left: 23px;
-	top: 245px;
+
+.btn:hover {
+  background-color: #45a049;
 }
-    </style>
+
+a {
+  color: #2196F3;
+}
+
+hr {
+  border: 1px solid lightgrey;
+}
+
+span.price {
+  float: right;
+  color: grey;
+}
+
+@media (max-width: 1000px) {
+  .row {
+    flex-direction: column-reverse;
+  }
+  .col-25 {
+    margin-bottom: 20px;
+  }
+}
+</style>
 </head>
+<body>
 
-<body style="background-color:hsl(0, 100%, 100%);" width="100%" height="100%">
-<!--CONTAINER TABLE-->
-<header>
-  <h3>P A Y M E N T</h3>
-  <div class="topnav">
-  <a href="HomepageStaff.php">Home</a>
-  <a href="ManageUserStaffs.php">Profile</a>
-  <a href="chooseclassSR.php">Subject</a>
-  <a class="active" href="payment1.php">Financial</a>
-</div>
-</header>
+<?php include"Include/MainPageHeader.php";?>
 
-<section>
-  <div id="apDiv1">
-    <div id="apDiv2">
+<form action="registerCustomer.php" method="post" align="center">
+<div class="row">
+  <div class="col-75">
+    <div class="container" align="center">
+      <form action="/action_page.php">
+      
+        <div class="row">
+          <div class="col-50">
+            <h3>Billing Address</h3>
+            <label for="fname"><i class="fa fa-user"></i> Full Name</label>
+            <input type="text" id="fname" name="firstname" placeholder="Name">
+            <label for="email"><i class="fa fa-envelope"></i> Email</label>
+            <input type="text" id="email" name="email" placeholder="nazifesto@example.com">
+            <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
+            <input type="text" id="adr" name="address" placeholder="Address">
+            <label for="city"><i class="fa fa-institution"></i> City</label>
+            <input type="text" id="city" name="city" placeholder="City">
 
-      <div id="apDiv3">
-      <form name="form2" action="payment1.php" method="get">
-      <table width="10" border="0">
-              <?php foreach ($payment as $Payment) {?> 
-        <tr>
-          <td rowspan="3"><img src="download.jpg" width="120" height="101" alt="image1">;</td>
-          <td><?php echo $Payment['Name'] ?><br><br> Payment Summary : <?php echo $Payment['price'] ?><br> Others : RM25</td>
-          <?php }?>
-      </table>
+            <div class="row">
+              <div class="col-50">
+                <label for="state">State</label>
+                <input type="text" id="state" name="state" placeholder="state">
+              </div>
+              <div class="col-50">
+                <label for="zip">Zip</label>
+                <input type="text" id="zip" name="zip" placeholder="zip">
+              </div>
+            </div>
+          </div>
 
-        <p>Payment Method :
-              <select name="Pmethod" id="Pmethod">
-              <option value="p1">Online Banking</option>
-              <option value="p2"><a href="payment1(1).php">Offline Banking</a></option>
-              </select>
-        </p> 
-    
+          <div class="col-50">
+            <h3>Payment</h3>
+            <label for="fname">Accepted Cards</label>
+            <div class="icon-container">
+              <i class="fa fa-cc-visa" style="color:navy;"></i>
+              <i class="fa fa-cc-amex" style="color:blue;"></i>
+              <i class="fa fa-cc-mastercard" style="color:red;"></i>
+              <i class="fa fa-cc-discover" style="color:orange;"></i>
+            </div>
+            <label for="cname">Name on Card</label>
+            <input type="text" id="cname" name="cardname" placeholder="Name">
+            <label for="ccnum">Credit card number</label>
+            <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
+            <label for="expmonth">Exp Month</label>
+            <input type="text" id="expmonth" name="expmonth" placeholder="Month">
+            <div class="row">
+              <div class="col-50">
+                <label for="expyear">Exp Year</label>
+                <input type="text" id="expyear" name="expyear" placeholder="Year">
+              </div>
+              <div class="col-50">
+                <label for="cvv">CVV</label>
+                <input type="text" id="cvv" name="cvv" placeholder="***">
+              </div>
+            </div>
+          </div>
           
-            <p><input type="radio" name="radio" id="bank" value="bank">Bank Islam</p>
-            <p><input type="radio" name="radio" id="Bank2" value="Bank2">CIMB Bank</p>
-            <p><input type="radio" name="radio" id="Bank3" value="Bank3">Maybank</p>
-            
-          
-
-      </div>
-      <div id="apDiv4">
-        <table width="10" height="172" border="1">
-          <tr>
-            <?php foreach ($payment as $Payment) {?> 
-            <td style="text-align:center">RM<?php echo ($Payment['price']+25) ?></td>
-            <?php }?>
-          </tr>
-        </table>
-        <div id="apDiv5">
-          <input type="Submit" class="Button1" id="Button1" value="Proceed">
         </div>
-        
-        </form>
-      </div>
+        <label>
+          <input type="checkbox" checked="checked" name="sameadr"> Shipping address same as billing
+        </label>
+        <a href="https://www.paypal.com/my/home" class="w3-block w3-right button w3-button">Payment</a>
+        <a href="CustomerHomePage.php" class="w3-block w3-right button w3-button">Back</a>
+      </form>
     </div>
   </div>
   
-  <article>
-    <p align="center" ><font color="white" size="6"><b>Announcement</b></font></p>
-    <div style="height:150px;width:270px;background-color: white;border:1px solid #ccc;font:12px/20px Georgia, Garamond, Serif;overflow:auto;" > Additional Mathematics class on Sunday morning has been cancelled. <br>
-      ----------------------------------------- <br>
-      Physics class on Sunday night has been cancelled. <br>
-      ----------------------------------------- <br>
-      Biology class on Saturday morning has been cancelled. <br>
-      ----------------------------------------- <br>
-      Mathematics class on Saturday night has been cancelled. <br>
-      ----------------------------------------- <br>
-    </div>
-  </article>
-</section>
+</div>
+<br>
 
-<footer>
-  <p>Copyright 2018 A-Prime Learning Centre. All right reserved.</p>
-</footer>
+
+<?php include"Include/MainPageFooter.php";?>
+
+
+<script>
+// Used to toggle the menu on small screens when clicking on the menu button
+function myFunction() {
+  var x = document.getElementById("navDemo");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else { 
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+
+
+}
+</script>
+
 </body>
 </html>
