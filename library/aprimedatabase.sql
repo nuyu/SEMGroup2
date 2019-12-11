@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 21, 2018 at 06:30 PM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.2.12
+-- Generation Time: Dec 09, 2019 at 12:37 PM
+-- Server version: 10.1.31-MariaDB
+-- PHP Version: 7.2.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,123 +19,117 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `aprimedatabase`
+-- Database: `crs_db`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `addmatha`
+-- Table structure for table `admin`
 --
 
-CREATE TABLE `addmatha` (
-  `no` int(11) NOT NULL,
-  `Name` varchar(255) NOT NULL,
-  `StudentID` varchar(255) NOT NULL,
-  `attendance` varchar(255) NOT NULL,
-  `remarks` varchar(255) NOT NULL,
-  `thedate` varchar(255) NOT NULL,
-  `mark` int(11) NOT NULL,
-  `comment` varchar(255) NOT NULL,
-  `totalattendance` varchar(255) NOT NULL
+CREATE TABLE `admin` (
+  `UserID` int(11) NOT NULL,
+  `AdminID` int(11) NOT NULL,
+  `Jobscope` varchar(100) NOT NULL,
+  `Status` varchar(10) NOT NULL,
+  `register_by` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `addmatha`
+-- Dumping data for table `admin`
 --
 
-INSERT INTO `addmatha` (`no`, `Name`, `StudentID`, `attendance`, `remarks`, `thedate`, `mark`, `comment`, `totalattendance`) VALUES
-(1, 'NURUL SALWANI BINTI RAZALI', 'A1001', 'present', '-', '2018-12-19 10:56:42', 90, 'EXCELLENT', '4/4'),
-(2, 'NUR ATHIQAH MOHD MAZALAN', 'A1002', 'absent', 'mc', '2018-12-19 10:56:42', 90, 'GOOD', '3/4'),
-(3, 'MUHAMMAD NAZIF BIN KASSIM', 'A1003', 'absent', '-', '2018-12-19 10:56:42', 90, 'GOOD', '1/4');
+INSERT INTO `admin` (`UserID`, `AdminID`, `Jobscope`, `Status`, `register_by`) VALUES
+(1, 3, 'Manage Rental Site Operation', 'active', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `announcement`
+-- Table structure for table `carbooking`
 --
 
-CREATE TABLE `announcement` (
-  `dateAnn` varchar(255) NOT NULL,
-  `subjectC` varchar(255) NOT NULL,
-  `subjectAnn` text NOT NULL
+CREATE TABLE `carbooking` (
+  `BookingID` int(11) NOT NULL,
+  `PickUpTime` time NOT NULL,
+  `PickUpDate` date NOT NULL,
+  `ReturnTime` time NOT NULL,
+  `ReturnDate` date NOT NULL,
+  `CarName` varchar(20) NOT NULL,
+  `CarPlate` varchar(10) NOT NULL,
+  `Car_Status` varchar(20) NOT NULL,
+  `CarID` int(11) NOT NULL,
+  `CustomerID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `carbooking`
+--
+
+INSERT INTO `carbooking` (`BookingID`, `PickUpTime`, `PickUpDate`, `ReturnTime`, `ReturnDate`, `CarName`, `CarPlate`, `Car_Status`, `CarID`, `CustomerID`) VALUES
+(2, '10:00:00', '2019-12-04', '15:00:00', '2019-12-04', 'Ford Fiesta', 'KDM6481', 'Active', 27, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `biologya`
+-- Table structure for table `cardetails`
 --
 
-CREATE TABLE `biologya` (
-  `no` int(11) NOT NULL,
-  `Name` varchar(255) NOT NULL,
-  `StudentID` varchar(255) NOT NULL,
-  `attendance` varchar(255) NOT NULL,
-  `remarks` varchar(255) NOT NULL,
-  `thedate` varchar(255) NOT NULL,
-  `mark` varchar(255) NOT NULL,
-  `comment` varchar(255) NOT NULL
+CREATE TABLE `cardetails` (
+  `CarID` int(11) NOT NULL,
+  `CarImage` varchar(255) NOT NULL,
+  `CarName` varchar(25) NOT NULL,
+  `CarClass` varchar(25) NOT NULL,
+  `CarPassenger` int(11) NOT NULL,
+  `CarPrice` float NOT NULL,
+  `CarGear` varchar(10) NOT NULL,
+  `CarFeatures` varchar(50) DEFAULT NULL,
+  `CarPlate` varchar(10) NOT NULL,
+  `CarStatus` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `cardetails`
+--
+
+INSERT INTO `cardetails` (`CarID`, `CarImage`, `CarName`, `CarClass`, `CarPassenger`, `CarPrice`, `CarGear`, `CarFeatures`, `CarPlate`, `CarStatus`) VALUES
+(27, 'Pictures/FordFiesta.jpg', 'Ford Fiesta', 'Compact', 5, 12, 'Manual', 'ABS,Air Bag,Air Conditional,HD Audio System,Centra', 'KDM6481', 'Active'),
+(28, 'Pictures/KiaSportage.png', 'Kia Sportage', 'Station Wagon', 5, 14, 'Manual', 'ABS,Air Bag,Air Conditional,HD Audio System,Electr', 'MNA8460', 'Active'),
+(29, 'Pictures/Peugeot207.png', 'Peugeot 207', 'Compact', 5, 12, 'Auto', 'Air Conditional,HD Audio System,Central Locking,Po', 'MOT9481', 'Active'),
+(31, 'Pictures/Teana.png', 'Nissan Teana', 'Compact', 5, 20, 'Auto', 'ABS,Air Bag,Air Conditional,HD Audio System,Centra', 'CT1111', 'Active'),
+(32, 'Pictures/', 'Nissan Teana', 'Compact', 5, 25, 'Auto', 'ABS,Air Bag,Air Conditional,HD Audio System,Centra', 'CT1111', 'Active');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `coursecatalogs`
+-- Table structure for table `customer`
 --
 
-CREATE TABLE `coursecatalogs` (
-  `subjectCode` varchar(255) NOT NULL,
-  `subjectName` varchar(255) NOT NULL,
-  `section` varchar(255) NOT NULL,
-  `day` varchar(255) NOT NULL,
-  `time` varchar(255) NOT NULL,
-  `place` varchar(255) NOT NULL,
-  `capacity` int(30) NOT NULL
+CREATE TABLE `customer` (
+  `UserID` int(11) NOT NULL,
+  `CustomerID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `coursecatalogs`
+-- Dumping data for table `customer`
 --
 
-INSERT INTO `coursecatalogs` (`subjectCode`, `subjectName`, `section`, `day`, `time`, `place`, `capacity`) VALUES
-('M001A', 'Additional Mathematics', 'A', 'Saturday', '08:00AM-10:00AM', 'R01', 30),
-('M004A', 'Biology', 'A', 'Saturday', '08:00AM-10:00AM', 'R02', 30),
-('M003', 'Physics', 'A', 'Saturday', '10.00AM - 12.00PM', 'R03', 30),
-('M004', 'Physics', 'A', 'Sunday', '08.00Am-10.00Am', 'R05', 30);
+INSERT INTO `customer` (`UserID`, `CustomerID`) VALUES
+(2, 1),
+(3, 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `parent`
+-- Table structure for table `invoice`
 --
 
-CREATE TABLE `parent` (
-  `Username` varchar(255) NOT NULL,
-  `ParentID` int(11) NOT NULL,
-  `DateJoined` date NOT NULL,
-  `PhoneNo` int(11) NOT NULL,
-  `Name` varchar(255) NOT NULL,
-  `Email` varchar(255) NOT NULL,
-  `IC` int(11) NOT NULL,
-  `Gender` varchar(255) NOT NULL,
-  `Occupation` varchar(255) NOT NULL,
-  `Address1` varchar(255) NOT NULL,
-  `Address2` varchar(255) NOT NULL,
-  `City` varchar(255) NOT NULL,
-  `State` varchar(255) NOT NULL,
-  `PostalCode` int(11) NOT NULL,
-  `Country` varchar(255) NOT NULL
+CREATE TABLE `invoice` (
+  `InvoiceID` int(11) NOT NULL,
+  `PaymentAmount` float NOT NULL,
+  `IssueDate` date NOT NULL,
+  `BookingID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `parent`
---
-
-INSERT INTO `parent` (`Username`, `ParentID`, `DateJoined`, `PhoneNo`, `Name`, `Email`, `IC`, `Gender`, `Occupation`, `Address1`, `Address2`, `City`, `State`, `PostalCode`, `Country`) VALUES
-('abu1', 1, '0000-00-00', 0, 'abu bin kalid', 'kalid@gmail.com', 0, '', '', '', '', '', '', 0, ''),
-('abu12', 2, '0000-00-00', 0, 'shamsudin bin hadi', 'kalid@gmail.com', 0, '', '', '', '', '', '', 0, ''),
-('iqbal', 3, '0000-00-00', 0, '', 'iqbal@gmail.com', 0, '', '', '', '', '', '', 0, '');
 
 -- --------------------------------------------------------
 
@@ -144,158 +138,54 @@ INSERT INTO `parent` (`Username`, `ParentID`, `DateJoined`, `PhoneNo`, `Name`, `
 --
 
 CREATE TABLE `payment` (
-  `Name` varchar(255) NOT NULL,
-  `ID` int(100) NOT NULL,
-  `Prove` tinyint(1) NOT NULL,
-  `Pnumber` int(100) NOT NULL,
-  `InvoiceNum` int(100) NOT NULL,
-  `receipt` int(100) NOT NULL,
-  `price` int(100) NOT NULL
+  `PaymentID` int(11) NOT NULL,
+  `PayDate` date NOT NULL,
+  `PayTime` time NOT NULL,
+  `InvoiceID` int(11) NOT NULL,
+  `CustomerID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `payment`
---
-
-INSERT INTO `payment` (`Name`, `ID`, `Prove`, `Pnumber`, `InvoiceNum`, `receipt`, `price`) VALUES
-('WAN IDRIS', 12345, 1, 139716106, 12655678, 12345677, 345),
-('', 0, 0, 0, 0, 0, 0),
-('', 0, 0, 0, 0, 0, 0),
-('Wan Muhammad Idris', 312524, 127, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `staff`
+-- Table structure for table `rent`
 --
 
-CREATE TABLE `staff` (
-  `Username` varchar(255) NOT NULL,
-  `StaffID` int(11) NOT NULL,
-  `DateJoined` date NOT NULL,
-  `PhoneNo` int(11) NOT NULL,
-  `Name` varchar(255) NOT NULL,
-  `Email` varchar(255) NOT NULL,
-  `IC` int(11) NOT NULL,
-  `Gender` varchar(255) NOT NULL,
-  `Position` varchar(255) NOT NULL,
-  `Address1` varchar(255) NOT NULL,
-  `Address2` varchar(255) NOT NULL,
-  `City` varchar(255) NOT NULL,
-  `State` varchar(255) NOT NULL,
-  `PostalCode` int(11) NOT NULL,
-  `Country` varchar(255) NOT NULL
+CREATE TABLE `rent` (
+  `RentID` int(11) NOT NULL,
+  `RentTime` time NOT NULL,
+  `RentDate` date NOT NULL,
+  `AdminID` int(11) NOT NULL,
+  `BookingID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `staff`
+-- Dumping data for table `rent`
 --
 
-INSERT INTO `staff` (`Username`, `StaffID`, `DateJoined`, `PhoneNo`, `Name`, `Email`, `IC`, `Gender`, `Position`, `Address1`, `Address2`, `City`, `State`, `PostalCode`, `Country`) VALUES
-('za1234', 1, '0000-00-00', 0, 'Wan Muhammad Idris', 'kalid@gmail.com', 0, '', '', '', '', '', '', 0, '');
+INSERT INTO `rent` (`RentID`, `RentTime`, `RentDate`, `AdminID`, `BookingID`) VALUES
+(2, '10:00:00', '2019-12-04', 3, 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `student`
+-- Table structure for table `return`
 --
 
-CREATE TABLE `student` (
-  `Username` varchar(255) NOT NULL,
-  `StudentID` int(11) NOT NULL,
-  `Name` varchar(255) NOT NULL,
-  `Email` varchar(255) NOT NULL,
-  `IC` bigint(20) NOT NULL,
-  `Gender` varchar(255) NOT NULL,
-  `FatherName` varchar(255) NOT NULL,
-  `MotherName` varchar(255) NOT NULL,
-  `ParentID` bigint(20) NOT NULL,
-  `PhoneNo` bigint(20) NOT NULL,
-  `GuardianNo` int(11) NOT NULL,
-  `Address1` varchar(255) NOT NULL,
-  `Address2` varchar(255) NOT NULL,
-  `City` varchar(255) NOT NULL,
-  `State` varchar(255) NOT NULL,
-  `PostalCode` int(11) NOT NULL,
-  `Country` varchar(255) NOT NULL,
-  `DateJoined` date NOT NULL
+CREATE TABLE `return` (
+  `ReturnID` int(11) NOT NULL,
+  `ReturnTime` time NOT NULL,
+  `ReturnDate` date NOT NULL,
+  `AdminID` int(11) NOT NULL,
+  `RentID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `student`
+-- Dumping data for table `return`
 --
 
-INSERT INTO `student` (`Username`, `StudentID`, `Name`, `Email`, `IC`, `Gender`, `FatherName`, `MotherName`, `ParentID`, `PhoneNo`, `GuardianNo`, `Address1`, `Address2`, `City`, `State`, `PostalCode`, `Country`, `DateJoined`) VALUES
-('Nazifesto', 1, 'Nazif Kassim', 'nazifesto@gmail.com', 961002106259, 'Male', 'Kassim', 'Noraini', 1, 149289170, 167188450, 'asd', 'asd', 'asd', 'asd', 803500, 'asd', '2018-12-18'),
-('Idrisan', 2, 'idris', 'kalid@gmail.com', 0, 'male', '', '', 0, 0, 0, '', '', '', '', 0, '', '0000-00-00'),
-('Nazifesto1234', 3, '123', 'kalalaid@gmail.com', 0, '', '', '', 0, 0, 0, '', '', '', '', 0, '', '0000-00-00'),
-('akmal', 4, 'akmal rozi', 'akmal@gmail.com', 0, '', '', '', 0, 0, 0, '', '', '', '', 0, '', '0000-00-00'),
-('AshrafHuhu', 5, 'Ashraf Dzinely', 'adgrhafaf@gmail.com', 0, '', '', '', 0, 0, 0, '', '', '', '', 0, '', '0000-00-00'),
-('din1', 6, '', 'din@gmail.com', 0, '', '', '', 0, 0, 0, '', '', '', '', 0, '', '0000-00-00'),
-('din11', 7, '', 'din@gmail.com', 0, '', '', '', 0, 0, 0, '', '', '', '', 0, '', '0000-00-00'),
-('kaka111', 8, '', 'kalid@gmail.com', 0, '', '', '', 0, 0, 0, '', '', '', '', 0, '', '0000-00-00'),
-('fateh1', 9, 'Al-Fateh', 'fateh@gmail.com', 0, '', '', '', 0, 0, 0, '', '', '', '', 0, '', '0000-00-00'),
-('naz!f', 10, 'Nazif', 'nazifesto@gmail.com', 0, '', '', '', 0, 0, 0, '', '', '', '', 0, '', '0000-00-00'),
-('ffatin', 11, '', 'kalid@gmail.com', 0, '', '', '', 0, 0, 0, '', '', '', '', 0, '', '0000-00-00'),
-('ZXC', 12, '', 'kalid@gmail.com', 0, '', '', '', 0, 0, 0, '', '', '', '', 0, '', '0000-00-00'),
-('idris', 13, 'Wan Muhammad Idris', 'idris@gmail.com', 0, '', '', '', 0, 0, 0, '', '', '', '', 0, '', '0000-00-00'),
-('Nazifesto1', 14, 'MUHAMMAD NAZIF BIN KASSIM', 'nazifesto@gmail.com', 0, '', '', '', 0, 167188450, 0, '', '', '', '', 0, '', '0000-00-00');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `subjectregistrations`
---
-
-CREATE TABLE `subjectregistrations` (
-  `No` int(11) NOT NULL,
-  `subjectName` varchar(255) NOT NULL,
-  `section` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `subjectregistrations`
---
-
-INSERT INTO `subjectregistrations` (`No`, `subjectName`, `section`) VALUES
-(1, 'Additional Mathematics', 'A'),
-(2, 'Additional Mathematics', 'A'),
-(3, 'Additional Mathematics', 'A');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `teacher`
---
-
-CREATE TABLE `teacher` (
-  `Username` varchar(255) NOT NULL,
-  `TeacherID` int(11) NOT NULL,
-  `DateJoined` date NOT NULL,
-  `PhoneNo` int(11) NOT NULL,
-  `Subject` varchar(255) NOT NULL,
-  `Email` varchar(255) NOT NULL,
-  `IC` int(11) NOT NULL,
-  `Gender` varchar(255) NOT NULL,
-  `Name` varchar(255) NOT NULL,
-  `Address1` varchar(255) NOT NULL,
-  `Address2` varchar(255) NOT NULL,
-  `City` varchar(255) NOT NULL,
-  `State` varchar(255) NOT NULL,
-  `PostalCode` int(11) NOT NULL,
-  `Country` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `teacher`
---
-
-INSERT INTO `teacher` (`Username`, `TeacherID`, `DateJoined`, `PhoneNo`, `Subject`, `Email`, `IC`, `Gender`, `Name`, `Address1`, `Address2`, `City`, `State`, `PostalCode`, `Country`) VALUES
-('kaka11121', 1, '0000-00-00', 0, '', 'kalid@gmail.com', 0, '0', 'Salwani', '0', '0', '0', '0', 0, '0'),
-('kaka111211', 2, '0000-00-00', 0, '', 'kalid@gmail.com', 0, '0', 'Fatin', '0', '0', '0', '0', 0, '0'),
-('kaka11121111', 3, '0000-00-00', 0, '', 'kalid@gmail.com', 0, '', 'Izzati', '', '', '', '', 0, ''),
-('fateh', 4, '0000-00-00', 0, '', 'fateh@gmail.com', 0, '', 'Athiqah', '', '', '', '', 0, ''),
-('wani', 5, '0000-00-00', 0, '', 'wani@gmail.com', 0, '', '', '', '', '', '', 0, '');
+INSERT INTO `return` (`ReturnID`, `ReturnTime`, `ReturnDate`, `AdminID`, `RentID`) VALUES
+(2, '15:00:00', '2019-12-04', 3, 2);
 
 -- --------------------------------------------------------
 
@@ -304,125 +194,198 @@ INSERT INTO `teacher` (`Username`, `TeacherID`, `DateJoined`, `PhoneNo`, `Subjec
 --
 
 CREATE TABLE `user` (
-  `Username` varchar(255) NOT NULL,
-  `Email` varchar(255) NOT NULL,
-  `Password` varchar(255) NOT NULL,
-  `Category` varchar(255) NOT NULL
+  `UserID` int(11) NOT NULL,
+  `Username` varchar(25) NOT NULL,
+  `Password` varchar(20) NOT NULL,
+  `Full_Name` varchar(30) NOT NULL,
+  `DOB` date NOT NULL,
+  `Email` varchar(50) NOT NULL,
+  `Gender` varchar(10) NOT NULL,
+  `Contact` varchar(12) NOT NULL,
+  `User_type` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`Username`, `Email`, `Password`, `Category`) VALUES
-('idris', 'idris@gmail.com', 'huhu', 'Student'),
-('iqbal', 'iqbal@gmail.com', 'iqbal123', 'Parent'),
-('naz!f', 'nazifesto@gmail.com', 'naz', 'Student'),
-('Nazifesto', 'nazifesto@gmail.com', 'naz', 'Student'),
-('Nazifesto1', 'nazifesto@gmail.com', 'naz', 'Student'),
-('Nazifesto1234', 'kalalaid@gmail.com', 'naziof', 'Student'),
-('wani', 'wani@gmail.com', 'wani123', 'Teacher'),
-('za123', 'kalid@gmail.com', '12', 'Staff'),
-('za1234', 'kalid@gmail.com', '12', 'Staff'),
-('ZXC', 'kalid@gmail.com', 'ZXCZXC', 'Student');
+INSERT INTO `user` (`UserID`, `Username`, `Password`, `Full_Name`, `DOB`, `Email`, `Gender`, `Contact`, `User_type`) VALUES
+(1, 'admin1', '1234', 'LeeJohn', '2019-05-09', 'helloworld@hotmail.com', 'Male', '0163535269', 'admin'),
+(2, 'customer1', '1234', 'Der', '2016-06-22', 'theriz2362@gmail.com', 'Male', '01236547896', 'customer'),
+(3, '', '', '', '1970-01-01', '', '', '', 'customer');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `addmatha`
+-- Indexes for table `admin`
 --
-ALTER TABLE `addmatha`
-  ADD PRIMARY KEY (`no`);
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`AdminID`),
+  ADD KEY `UserID` (`UserID`),
+  ADD KEY `register_by` (`register_by`);
 
 --
--- Indexes for table `biologya`
+-- Indexes for table `carbooking`
 --
-ALTER TABLE `biologya`
-  ADD PRIMARY KEY (`no`);
+ALTER TABLE `carbooking`
+  ADD PRIMARY KEY (`BookingID`),
+  ADD KEY `CustomerID` (`CustomerID`),
+  ADD KEY `CarID` (`CarID`);
 
 --
--- Indexes for table `parent`
+-- Indexes for table `cardetails`
 --
-ALTER TABLE `parent`
-  ADD PRIMARY KEY (`ParentID`);
+ALTER TABLE `cardetails`
+  ADD PRIMARY KEY (`CarID`);
 
 --
--- Indexes for table `staff`
+-- Indexes for table `customer`
 --
-ALTER TABLE `staff`
-  ADD PRIMARY KEY (`StaffID`);
+ALTER TABLE `customer`
+  ADD PRIMARY KEY (`CustomerID`),
+  ADD KEY `UserID` (`UserID`);
 
 --
--- Indexes for table `student`
+-- Indexes for table `invoice`
 --
-ALTER TABLE `student`
-  ADD PRIMARY KEY (`StudentID`);
+ALTER TABLE `invoice`
+  ADD PRIMARY KEY (`InvoiceID`),
+  ADD KEY `BookingID` (`BookingID`);
 
 --
--- Indexes for table `subjectregistrations`
+-- Indexes for table `payment`
 --
-ALTER TABLE `subjectregistrations`
-  ADD PRIMARY KEY (`No`);
+ALTER TABLE `payment`
+  ADD PRIMARY KEY (`PaymentID`),
+  ADD KEY `InvoiceID` (`InvoiceID`),
+  ADD KEY `CustomerID` (`CustomerID`);
 
 --
--- Indexes for table `teacher`
+-- Indexes for table `rent`
 --
-ALTER TABLE `teacher`
-  ADD PRIMARY KEY (`TeacherID`);
+ALTER TABLE `rent`
+  ADD PRIMARY KEY (`RentID`),
+  ADD KEY `AdminID` (`AdminID`),
+  ADD KEY `BookingID` (`BookingID`);
+
+--
+-- Indexes for table `return`
+--
+ALTER TABLE `return`
+  ADD PRIMARY KEY (`ReturnID`),
+  ADD KEY `AdminID` (`AdminID`),
+  ADD KEY `RentID` (`RentID`);
 
 --
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`Username`);
+  ADD PRIMARY KEY (`UserID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `addmatha`
+-- AUTO_INCREMENT for table `admin`
 --
-ALTER TABLE `addmatha`
-  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `admin`
+  MODIFY `AdminID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `biologya`
+-- AUTO_INCREMENT for table `carbooking`
 --
-ALTER TABLE `biologya`
-  MODIFY `no` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `carbooking`
+  MODIFY `BookingID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `parent`
+-- AUTO_INCREMENT for table `cardetails`
 --
-ALTER TABLE `parent`
-  MODIFY `ParentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `cardetails`
+  MODIFY `CarID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
--- AUTO_INCREMENT for table `staff`
+-- AUTO_INCREMENT for table `customer`
 --
-ALTER TABLE `staff`
-  MODIFY `StaffID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+ALTER TABLE `customer`
+  MODIFY `CustomerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `student`
+-- AUTO_INCREMENT for table `invoice`
 --
-ALTER TABLE `student`
-  MODIFY `StudentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+ALTER TABLE `invoice`
+  MODIFY `InvoiceID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `subjectregistrations`
+-- AUTO_INCREMENT for table `payment`
 --
-ALTER TABLE `subjectregistrations`
-  MODIFY `No` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `payment`
+  MODIFY `PaymentID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `teacher`
+-- AUTO_INCREMENT for table `return`
 --
-ALTER TABLE `teacher`
-  MODIFY `TeacherID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+ALTER TABLE `return`
+  MODIFY `ReturnID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `admin`
+--
+ALTER TABLE `admin`
+  ADD CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`),
+  ADD CONSTRAINT `admin_ibfk_2` FOREIGN KEY (`register_by`) REFERENCES `admin` (`AdminID`);
+
+--
+-- Constraints for table `carbooking`
+--
+ALTER TABLE `carbooking`
+  ADD CONSTRAINT `carbooking_ibfk_1` FOREIGN KEY (`CustomerID`) REFERENCES `customer` (`CustomerID`),
+  ADD CONSTRAINT `carbooking_ibfk_2` FOREIGN KEY (`CarID`) REFERENCES `cardetails` (`CarID`);
+
+--
+-- Constraints for table `customer`
+--
+ALTER TABLE `customer`
+  ADD CONSTRAINT `customer_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`);
+
+--
+-- Constraints for table `invoice`
+--
+ALTER TABLE `invoice`
+  ADD CONSTRAINT `invoice_ibfk_1` FOREIGN KEY (`BookingID`) REFERENCES `carbooking` (`BookingID`);
+
+--
+-- Constraints for table `payment`
+--
+ALTER TABLE `payment`
+  ADD CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`InvoiceID`) REFERENCES `invoice` (`InvoiceID`),
+  ADD CONSTRAINT `payment_ibfk_2` FOREIGN KEY (`CustomerID`) REFERENCES `customer` (`CustomerID`);
+
+--
+-- Constraints for table `rent`
+--
+ALTER TABLE `rent`
+  ADD CONSTRAINT `rent_ibfk_1` FOREIGN KEY (`AdminID`) REFERENCES `admin` (`AdminID`),
+  ADD CONSTRAINT `rent_ibfk_2` FOREIGN KEY (`BookingID`) REFERENCES `carbooking` (`BookingID`);
+
+--
+-- Constraints for table `return`
+--
+ALTER TABLE `return`
+  ADD CONSTRAINT `return_ibfk_1` FOREIGN KEY (`AdminID`) REFERENCES `admin` (`AdminID`),
+  ADD CONSTRAINT `return_ibfk_2` FOREIGN KEY (`RentID`) REFERENCES `rent` (`RentID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
