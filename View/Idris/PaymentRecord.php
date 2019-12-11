@@ -1,209 +1,159 @@
-<?php
-
-require_once'../Controller/PaymentController.php';
-
-$PaymentController = new PaymentController();
-
-if(isset($_GET['Pmethod'])){
-
-$PaymentController->PayMethod2();
-}
-
-$payment = $PaymentController->view();
-
-?>
-
 <!DOCTYPE html>
-<html>
-<head>
-	<title>PAYMENT</title>
-	<link rel="stylesheet" type="text/css" href="payment2.css">
-    <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
-	<style type="text/css">
-	#apDiv1 {
-	position: absolute;
-	width: 846px;
-	height: 487px;
-	z-index: 1;
-	left: 14px;
-	top: 220px;
-	background-color: #bdbdbd;
-}
-    #apDiv2 {
-	position: absolute;
-	width: 711px;
-	height: 379px;
-	z-index: 1;
-	left: 59px;
-	top: 53px;
-	background-color: #e0e0e0;
-}
-    #apDiv3 {
-	position: absolute;
-	width: 648px;
-	height: 314px;
-	z-index: 1;
-	background-color: #9e9e9e;
-	left: 33px;
-	top: 41px;
-	font-size: 14px;
-}
-    #apDiv4 {
-	position: absolute;
-	width: 185px;
-	height: 289px;
-	z-index: 2;
-	left: 466px;
-	top: 33px;
-	background-color: #9e9e9e;
-}
-    #apDiv5 {
-	position: absolute;
-	width: 61px;
-	height: 26px;
-	z-index: 1;
-	left: 232px;
-	top: 210px;
-}
-    #apDiv6 {
-	position: absolute;
-	width: 152px;
-	height: 26px;
-	z-index: 2;
-	left: 134px;
-	top: 156px;
-}
-    #apDiv7 {
-	position: absolute;
-	width: 114px;
-	height: 23px;
-	z-index: 3;
-	left: 22px;
-	top: 193px;
-}
-    #apDiv8 {
-	position: absolute;
-	width: 125px;
-	height: 25px;
-	z-index: 4;
-	left: 22px;
-	top: 217px;
-}
-    #apDiv9 {
-	position: absolute;
-	width: 127px;
-	height: 23px;
-	z-index: 5;
-	left: 23px;
-	top: 245px;
-}
-    #apDiv10 {
-	position: absolute;
-	width: 202px;
-	height: 278px;
-	z-index: 2;
-	left: 21px;
-	top: 25px;
-}
-    #apDiv11 {
-	position: absolute;
-	width: 181px;
-	height: 158px;
-	z-index: 1;
-	left: 6px;
-	top: 102px;
-}
-    #apDiv12 {
-	position: absolute;
-	width: 342px;
-	height: 258px;
-	z-index: 3;
-	left: 274px;
-	top: 23px;
-}
-    #apDiv13 {
-	position: absolute;
-	width: 135px;
-	height: 167px;
-	z-index: 2;
-	left: 64px;
-	top: 56px;
-}
-    #apDiv14 {
-	position: absolute;
-	width: 77px;
-	height: 27px;
-	z-index: 2;
-	left: 124px;
-	top: 1px;
-}
-    </style>
-</head>
+<html lang="en">
+<title>Welcome to Car Rental System</title>
+<?php include"Include/MetaLink.php";?>
+<?php include"Style.php";?>
+<?php include"Include/AdminHeader.php";?>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+.fa-anchor,.fa-coffee {font-size:200px}
 
-<body style="background-color:hsl(0, 100%, 100%);" width="100%" height="100%">
-<!--CONTAINER TABLE-->
-<header>
-  <h3>P A Y M E N T</h3>
-  <div class="topnav">
-  <a href="HomepageParent.php">Home</a>
-  <a href="ManageUserParents.php">Profile</a>
-  <a href="#subject">Subject</a>
-  <a class="active" href="payment2.php">Financial</a>
+.button{
+  background-color: #F08080;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+table,th,td {
+border: 1px solid black;
+border-collapse: collapse;
+}
+th,td{
+padding: 5px;
+text-align: left;  
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+#myTable {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+  font-size: 18px;
+}
+
+#myTable th, #myTable td {
+  text-align: left;
+  padding: 12px;
+}
+
+#myTable tr {
+  border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header, #myTable tr:hover {
+  background-color: #f1f1f1;
+}
+</style>
+<body>
+
+<div class="w3-row-padding w3-padding-64 w3-container">
+<div class="w3-content">
+<body>
+  <input type="text" id="myInput" onkeyup="search()" placeholder="Search for Car Serial Number" title="Type in a name">
+
+<table id="myTable">
+  <tr class="header">
+    <th>Car Serial Number</th>
+    <th>Name</th>
+    <th>Car</th>
+    <th>Car Plate</th>
+    <th>Rent</th>
+    <th>Return</th>
+  </tr>
+  <tr>
+    <td>BK_9476</td>
+    <td>Anthony</td>
+    <td>Nissan GTR</td>
+    <td>WWW1234</td>
+    <td>12/03/2019 8:30AM</td>
+    <td>14/03/2019 8:30AM</td>
+  </tr>
+  <tr>
+    <td>BK_2146</td>
+    <td>Mark</td>
+    <td>Nissan GTR</td>
+    <td>WWW1234</td>
+    <td>12/03/2019 8:30AM</td>
+    <td>14/03/2019 8:30AM</td>
+  </tr>
+  <tr>
+    <td>BK_9499</td>
+    <td>James</td>
+    <td>Nissan GTR</td>
+    <td>WWW1234</td>
+    <td>12/03/2019 8:30AM</td>
+    <td>14/03/2019 8:30AM</td>
+  </tr>
+</table>
 </div>
-</header>
+</div>
+</body>
 
-<section>
-  <div id="apDiv1">
-    <div id="apDiv2">
-
-      <div id="apDiv3">
-        <p>&nbsp;</p>
-        <form name="form3" action="payment2.php" method="get">
-        <div id="apDiv10"><img src="download.jpg" width="99" height="112" alt="image2">
-          <div id="apDiv11">
-          	<?php foreach ($payment as $Payment) {?>
-            <p><?php echo $Payment['Name'] ?></p>
-            <p>PAYMENT SUMMARY:-</p>
-            <p>Fee : RM<?php echo $Payment['price'] ?></p>
-            <p>Others : RM25</p>
-            <?php }?>
-          </div>
-        </div>
-        <div id="apDiv12">
-          <div id="apDiv5">
-            <input type="Submit" class="Button1" id="Button1" value="Approve" />
-          </div>
-          <div id="apDiv13"><img src="Mbank.jpg" width="133" height="165" alt="image3"></div>
-          Payment Prove:- 
-          <div id="apDiv14">
-            <select name="Pmethod">
-              <option value="p1">Online Banking</option>
-              <option value="p2"><a href="payment2(1).php">Offline Banking</a></option>
-            </select>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <article>
-    <p align="center" ><font color="white" size="6"><b>Announcement</b></font></p>
-    <div style="height:150px;width:270px;background-color: white;border:1px solid #ccc;font:12px/20px Georgia, Garamond, Serif;overflow:auto;" > Additional Mathematics class on Sunday morning has been cancelled. <br>
-      ----------------------------------------- <br>
-      Physics class on Sunday night has been cancelled. <br>
-      ----------------------------------------- <br>
-      Biology class on Saturday morning has been cancelled. <br>
-      ----------------------------------------- <br>
-      Mathematics class on Saturday night has been cancelled. <br>
-      ----------------------------------------- <br>
-    </div>
-  </article>
-</section>
-
-<footer>
-  <p>Copyright 2018 A-Prime Learning Centre. All right reserved.</p>
+<!-- Footer -->
+<footer class="w3-container w3-padding-64 w3-center w3-opacity">  
+  <div class="w3-xlarge w3-padding-32">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+ </div>
+ <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
 </footer>
+
+<script>
+// Used to toggle the menu on small screens when clicking on the menu button
+function myFunction() {
+  var x = document.getElementById("navDemo");
+  if (x.className.indexOf("w3-show") == -1) {
+    x.className += " w3-show";
+  } else { 
+    x.className = x.className.replace(" w3-show", "");
+  }
+}
+
+function search() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+</script>
+
 </body>
 </html>
-
